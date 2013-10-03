@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------------
- README for fastq_compare                                                   
-                                                                            
+ README for fastq_compare
+
  Code contributed by T. Coudrat, P. Moncuquet and A. Nemri [pySickle_team3] 
 
- https://github.com/thomascoudrat/pySickle_team3                            
- Please report bugs at adnane.nemri@csiro.au                                
- Licence: GNU General public licence version 3                              
+ https://github.com/thomascoudrat/pySickle_team3
+ Please report bugs at adnane.nemri@csiro.au
+ Licence: GNU General public licence version 3
 ----------------------------------------------------------------------------
 
 This standalone program generates a report on a single-end fastq file before and after changes were made to it, eg
@@ -14,7 +14,7 @@ The output is stored in a file specified by the user.
 
 Note: the program does not read fastq files of paired-end reads. <<< Next update
 
-Note: the program is meant to be used alongside a quality trimming software such as Sickle
+Note: in future releases, the program is to be used alongside a quality trimming software such as Sickle
 
 dependencies: BioPython
 
