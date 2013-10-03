@@ -9,8 +9,9 @@ import Bio.SeqIO
 def read_fastq(fastqFile, qFormat):
     """
     Read the fastq file given as argument
-    Calculate average score
-    Output the number of reads in that file, the average score of those sequences,
+    Calculate average base quality score
+    Output the number of reads in that file, the average 
+    base quality score of those sequences,
     and their average length
     """
 
@@ -22,6 +23,7 @@ def read_fastq(fastqFile, qFormat):
         readID = read.id
         readSeq = read.seq
         readScoreList = read.letter_annotations["phred_quality"]
+        # Get the average base quality score for this sequence
         readScoreAvg = sum(readScoreList) / len(readScoreList)
         
         readScores.append(readScoreAvg)
