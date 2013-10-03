@@ -1,0 +1,16 @@
+::::::::::::::
+report_set1_temp.txt
+::::::::::::::
+FASTQ trimming report
+
+FastqFile 	 Read# 	 AvgScore 	 AvgLength
+Before 	44050 	 36.71 	 188.42
+After 	44049 	 36.71 	 188.41
+::::::::::::::
+report_set2_temp.txt
+::::::::::::::
+FASTQ trimming report
+
+FastqFile 	 Read# 	 AvgScore 	 AvgLength
+Before 	44050 	 36.71 	 188.42
+After 	31025 	 40.41 	 53.63

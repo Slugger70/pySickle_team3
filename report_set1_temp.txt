@@ -1,0 +1,5 @@
+FASTQ trimming report
+
+FastqFile 	 Read# 	 AvgScore 	 AvgLength
+Before 	44050 	 36.71 	 188.42
+After 	44049 	 36.71 	 188.41
