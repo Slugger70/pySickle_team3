@@ -3,7 +3,7 @@
 #                                                                   #
 # Code by T. Coudrat, P. Moncuquet and A. Nemri [pySickle_team3]    #
 # https://github.com/thomascoudrat/pySickle_team3                   #
-# Please report bugs at adnane.nemri@csiro.au                       #
+# Please report bugs to adnane.nemri@csiro.au                       #
 #===================================================================#
 
 This script generates a report on a single end fastq file before and after changes were made to it, eg
