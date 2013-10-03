@@ -22,6 +22,11 @@ def read_fastq(fastqFile, qFormat):
         
         readID = read.id
         readSeq = read.seq
+        
+        # If the sequence is of length 0, skip to next sequence in file
+        if len(readSeq) == 0:
+            continue
+
         readScoreList = read.letter_annotations["phred_quality"]
         # Get the average base quality score for this sequence
         readScoreAvg = sum(readScoreList) / len(readScoreList)
@@ -60,15 +65,21 @@ def write_report(in_data, out_data, reportPath):
 # Run the script
 #
 if len(sys.argv) == 5:
-    in_fastq = sys.argv[1]
-    out_fastq = sys.argv[2]
+    # fastq file path before trim
+    before_fastq = sys.argv[1]
+    # fastq file path after trim
+    after_fastq = sys.argv[2]
+    # format of the fastq file
     fastqFormat = sys.argv[3]
+    # path of the log file to be written
     reportPath = sys.argv[4]
 
+    # Allowed fastq format, and the corresponding code to give to SeqIO
     allowedFormats = {'phred33' : 'fastq',
                       'phred64' : 'fastq-illumina',
                       'solexa' : 'fastq-solexa'}
 
+    # Make sure the format is known
     try:
         assert fastqFormat in allowedFormats
     except AssertionError as e:
@@ -78,8 +89,15 @@ if len(sys.argv) == 5:
     #in_readNum, in_avgScore, in_avgLength =  read_fastq(in_fastq)
     #out_readNum, out_avgScore, out_avgLength = read_fastq(out_fastq)
 
-    write_report(read_fastq(in_fastq, allowedFormats[fastqFormat]),
-                 read_fastq(out_fastq, allowedFormats[fastqFormat]),
+    # The function read_fastq() is called on the BEFORE and AFTER trim fastq files
+    # and the path of the output is also given 
+    write_report(read_fastq(before_fastq, allowedFormats[fastqFormat]),
+                 read_fastq(after_fastq, allowedFormats[fastqFormat]),
                  reportPath)
 else:
     print "usage: `python fastq_compare.py BEFORE.fq AFTER.fq <quality_coding> <outfile>`"
+    print "options for quality_coding:"
+    print "phred33 : Sanger and Illumina reads produced with CASAVA 1.8+"
+    print "phred64 : Illumina reads produced with CASAVA 1.3+"
+    print "solexa  : Solexa reads"
+
