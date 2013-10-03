@@ -1,24 +1,24 @@
 # Rule 'all' which is a make keyword
-all: bombycilla_co1.png
+all: global_report.txt
 
 # Another keyword, used to 
 clean:
-	rm -f *.aln *.phy *.reduced *.new *.png
+	rm -f *temp.txt
 
-# Step1: Run the alignment
-bombycilla_co1.fasta.aln: bombycilla_co1.fasta
-	muscle -in bombycilla_co1.fasta -out bombycilla_co1.fasta.aln
+# Step1: Run Sickle parameter set1
+report_parameter_set1_temp.txt: test_dataset_input.fastqsanger
+	sickle se -f test_dataset_input.fastqsanger -t illumina -o report_parameter_set1_temp.txt -q 13 -l 40
 
-# Step2: Convert from fasta alignment to phy alignment
-bombycilla_co1.phy: bombycilla_co1.fasta.aln
-	python -c "import Bio.AlignIO; Bio.AlignIO.convert('bombycilla_co1.fasta.aln', 'fasta', 'bombycilla_co1.phy', 'phylip-relaxed')"
+# Step2: Run Sickle parameter set2
+report_parameter_set2_temp.txt: test_dataset_input.fastqsanger
+	sickle se -f test_dataset_input.fastqsanger -t illumina -o report_parameter_set1_temp.txt -q 23 -l 40
 
-# Step3: create the newick tree
-bombycilla_co1.new: bombycilla_co1.phy
-	rm -f RAxML_*
-	raxmlHPC -m GTRCAT -n bombycilla_co1.phy -p 10000 -s bombycilla_co1.phy
-	mv RAxML_result.bombycilla_co1.phy bombycilla_co1.new
+# Step3: Run Sickle parameter set3
+report_parameter_set3_temp.txt: test_dataset_input.fastqsanger
+	sickle se -f test_dataset_input.fastqsanger -t illumina -o report_parameter_set1_temp.txt -q 33 -l 40
 
-# Step4: Create an .png image
-bombycilla_co1.png: bombycilla_co1.new draw_tree.py
-	python draw_tree.py bombycilla_co1.new bombycilla_co1.png
+# Step4: Run Sickle parameter set4
+report_parameter_set4_temp.txt: test_dataset_input.fastqsanger
+	sickle se -f test_dataset_input.fastqsanger -t illumina -o report_parameter_set1_temp.txt -q 39 -l 40
+
+
