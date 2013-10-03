@@ -1,0 +1,27 @@
+# This Makefile runs several times sickles, our script gather before and after information about the trimming to help the user choose proper parameter to do the trimming
+# Rule 'all' which is a make keyword
+all: global_report.txt
+
+# Another keyword, used to 
+clean:
+	rm -f *temp.txt
+
+# Step1: Run Sickle parameter set1
+output_fastq_set1.fastqsanger: test/in.fastq
+	../sickle/sickle se -f test/in.fastq -t sanger -o output_fastq_set1.fastqsanger -q 13 -l 40
+# Step2: run our python script fastq_compare
+report_set1_temp.txt: test/in.fastq output_fastq_set1.fastqsanger
+	./fastq_compare.py test/in.fastq output_fastq_set1.fastqsanger phred33 report_set1_temp.txt
+
+# Step3: Run Sickle parameter set2
+output_fastq_set2.fastqsanger: test/in.fastq
+	../sickle/sickle se -f test/in.fastq -t sanger -o output_fastq_set2.fastqsanger -q 39 -l 40
+# Step4: run our python script fastq_compare
+report_set2_temp.txt: test/in.fastq output_fastq_set2.fastqsanger
+	./fastq_compare.py test/in.fastq output_fastq_set2.fastqsanger phred33 report_set2_temp.txt
+
+
+
+# step5
+global_report.txt: report_set1_temp.txt report_set2_temp.txt
+	more report_set*_temp.txt > global_report.txt
