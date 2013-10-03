@@ -27,10 +27,10 @@ usage: `python fastq_compare.py <BEFORE.fq> <AFTER.fq> <quality_coding> <outfile
 
 
 options for quality_coding:
-`
+
     phred33        Sanger and Illumina reads produced with CASAVA 1.8+
 
     phred64        Illumina reads produced with CASAVA 1.3+
 
     solexa        Solexa reads
-`
+
