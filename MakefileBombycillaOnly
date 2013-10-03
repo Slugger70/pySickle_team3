@@ -1,0 +1,24 @@
+# Rule 'all' which is a make keyword
+all: bombycilla_co1.png
+
+# Another keyword, used to 
+clean:
+	rm -f *.aln *.phy *.reduced *.new *.png
+
+# Step1: Run the alignment
+bombycilla_co1.fasta.aln: bombycilla_co1.fasta
+	muscle -in bombycilla_co1.fasta -out bombycilla_co1.fasta.aln
+
+# Step2: Convert from fasta alignment to phy alignment
+bombycilla_co1.phy: bombycilla_co1.fasta.aln
+	python -c "import Bio.AlignIO; Bio.AlignIO.convert('bombycilla_co1.fasta.aln', 'fasta', 'bombycilla_co1.phy', 'phylip-relaxed')"
+
+# Step3: create the newick tree
+bombycilla_co1.new: bombycilla_co1.phy
+	rm -f RAxML_*
+	raxmlHPC -m GTRCAT -n bombycilla_co1.phy -p 10000 -s bombycilla_co1.phy
+	mv RAxML_result.bombycilla_co1.phy bombycilla_co1.new
+
+# Step4: Create an .png image
+bombycilla_co1.png: bombycilla_co1.new draw_tree.py
+	python draw_tree.py bombycilla_co1.new bombycilla_co1.png
