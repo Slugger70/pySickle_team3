@@ -1,1 +1,0 @@
-sickle se -f in_file.fastq -t sanger -o out_file.fastq
