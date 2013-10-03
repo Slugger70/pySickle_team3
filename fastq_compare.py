@@ -81,10 +81,11 @@ if len(sys.argv) == 5:
 
     # Make sure the format is known
     try:
-        assert fastqFormat in allowedFormats
+        assert fastqFormat in allowedFormats.keys()
     except AssertionError as e:
         print "The format type has to be one of the following", allowedFormats
         print e
+        raise
         
     #in_readNum, in_avgScore, in_avgLength =  read_fastq(in_fastq)
     #out_readNum, out_avgScore, out_avgLength = read_fastq(out_fastq)
